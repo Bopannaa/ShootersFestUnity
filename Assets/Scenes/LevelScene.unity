@@ -394,11 +394,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 351590614}
-  - component: {fileID: 351590619}
   - component: {fileID: 351590617}
-  - component: {fileID: 351590616}
   - component: {fileID: 351590615}
   - component: {fileID: 351590620}
+  - component: {fileID: 351590616}
   m_Layer: 5
   m_Name: ChapterParent
   m_TagString: Untagged
@@ -452,8 +451,8 @@ CanvasGroup:
   m_GameObject: {fileID: 351590613}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!114 &351590617
 MonoBehaviour:
@@ -479,14 +478,6 @@ MonoBehaviour:
   m_Spacing: {x: 40, y: 40}
   m_Constraint: 1
   m_ConstraintCount: 5
---- !u!222 &351590619
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 351590613}
-  m_CullTransparentMesh: 0
 --- !u!95 &351590620
 Animator:
   serializedVersion: 3
@@ -574,8 +565,8 @@ Canvas:
   m_GameObject: {fileID: 415396490}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 1770773580}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1042,6 +1033,7 @@ GameObject:
   - component: {fileID: 1770773581}
   - component: {fileID: 1770773580}
   - component: {fileID: 1770773579}
+  - component: {fileID: 1770773582}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1083,7 +1075,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -1114,3 +1106,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1770773582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770773578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2

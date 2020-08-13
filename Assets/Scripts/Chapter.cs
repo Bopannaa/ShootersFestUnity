@@ -18,6 +18,7 @@ public class Chapter : MonoBehaviour
 
 
     Animator chapteraAnim;
+    int dir = 0;
 
     void OnEnable()
     {
@@ -49,38 +50,46 @@ public class Chapter : MonoBehaviour
 
     public void NextChapter()
     {
-        currentChapter++;
-        if (currentChapter > totalChapters)
-        {
-            currentChapter = 1;
-        }
-
         chapteraAnim.Play(moveLeftClip.name);
-
-        for (int i = 0; i < 10; i++)
-        {
-            if (ActionReset != null)
-            {
-                ActionReset(levelChoosers[i], i + ((currentChapter - 1) * 10) + 1);
-            }
-        }
     }
 
     public void PreviousChapter()
     {
-        currentChapter--;
-        if (currentChapter < 1)
-        {
-            currentChapter = 10;
-        }
-
         chapteraAnim.Play(moveRightClip.name);
+    }
 
-        for (int i = 0; i < 10; i++)
+    void ChangeChapter(int dir)
+    {
+        if (dir > 0)
         {
-            if (ActionReset != null)
+            currentChapter++;
+            if (currentChapter > totalChapters)
             {
-                ActionReset(levelChoosers[i], i + ((currentChapter - 1) * 10) + 1);
+                currentChapter = 1;
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (ActionReset != null)
+                {
+                    ActionReset(levelChoosers[i], i + ((currentChapter - 1) * 10) + 1);
+                }
+            }
+        }
+        if (dir < 0)
+        {
+            currentChapter--;
+            if (currentChapter < 1)
+            {
+                currentChapter = 10;
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (ActionReset != null)
+                {
+                    ActionReset(levelChoosers[i], i + ((currentChapter - 1) * 10) + 1);
+                }
             }
         }
     }
