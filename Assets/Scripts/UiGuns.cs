@@ -19,6 +19,8 @@ public class UiGuns : MonoBehaviour
     bool isMoveRight = true;
     bool isMoveLeft = false;
 
+    float rotationX, rotationY;
+
     void Awake()
     {
         foreach (GameObject g in guns)
@@ -49,17 +51,19 @@ public class UiGuns : MonoBehaviour
         animator.Play(moveGunRightClip.name);
     }
 
-    float rotationX, rotationY;
-
     void Update()
     {
         rotationX = Input.GetAxis("Mouse X") * 2;
         rotationY = Input.GetAxis("Mouse Y") * 2;
 
+        var currentRot = gunsParentY.transform.localRotation;
+        currentRot.z = Mathf.Clamp(currentRot.z, -0.1f, 0.1f);
+        gunsParentY.transform.localRotation = currentRot;
+
         if (Input.GetMouseButton(0))
         {
-            gunsParentX.transform.DOBlendableLocalRotateBy(Vector3.down * rotationX, 1f);
             gunsParentY.transform.DOBlendableLocalRotateBy(Vector3.back * rotationY, 1f);
+            gunsParentX.transform.DOBlendableLocalRotateBy(Vector3.down * rotationX, 1f);
         }
     }
 
@@ -84,8 +88,8 @@ public class UiGuns : MonoBehaviour
 
     void ResetGuns(bool direction)
     {
-        gunsParentX.transform.localEulerAngles = Vector3.zero;
-        gunsParentY.transform.localEulerAngles = Vector3.zero;
+        gunsParentX.transform.localEulerAngles = new Vector3(0f, -50f, 0f);
+        gunsParentY.transform.localEulerAngles = new Vector3(0f, 0f, -3.5f);
         var gun = gunsQueue.Dequeue();
         gun.SetActive(false);
         if (direction)
