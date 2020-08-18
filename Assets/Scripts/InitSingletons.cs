@@ -4,13 +4,28 @@ using UnityEngine;
 
 public class InitSingletons : MonoBehaviour
 {
-    public GameObject worldEnvoirnment;
-
     Scene_Manager scene_Manager;
+    public GameObject worlEnv;
+    public GameObject player;
 
     void Awake()
     {
-        scene_Manager = Scene_Manager.Instance;    
-        worldEnvoirnment.transform.parent = scene_Manager.transform;
+        scene_Manager = Scene_Manager.Instance;
+    }
+
+    void OnEnable()
+    {
+        scene_Manager.CreatePersistableObjects += CreateSingletonObjects;
+    }
+
+    void OnDisable()
+    {
+        scene_Manager.CreatePersistableObjects -= CreateSingletonObjects;
+    }
+
+    void CreateSingletonObjects()
+    {
+        Instantiate(worlEnv, Vector3.zero, Quaternion.identity, scene_Manager.transform);
+        Instantiate(player, Vector3.zero, Quaternion.identity, scene_Manager.transform);
     }
 }

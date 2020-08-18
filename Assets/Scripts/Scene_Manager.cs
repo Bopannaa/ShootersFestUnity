@@ -6,12 +6,23 @@ using System;
 
 public class Scene_Manager : Singleton<Scene_Manager>
 {   
+    public Action CreatePersistableObjects; 
+
+    void Start()
+    {
+        if(CreatePersistableObjects != null)
+        {
+            CreatePersistableObjects();
+        }
+    }
+
     public void OnEnable()
     {
         ShopScene.ActionBackButton  += LoadStartScene;
         StartScene.ActionShopButton += LoadShopScene;
         StartScene.ActionPlayButton += LoadLevelScene;
         LevelScene.ActionBackButton += LoadStartScene;
+        LevelChooser.ActionLevelButton += LoadGameScene;
     }
 
     void OnDisable()
@@ -20,6 +31,7 @@ public class Scene_Manager : Singleton<Scene_Manager>
         StartScene.ActionShopButton -= LoadShopScene;
         StartScene.ActionPlayButton -= LoadLevelScene;
         LevelScene.ActionBackButton -= LoadStartScene;
+        LevelChooser.ActionLevelButton -= LoadGameScene;
     }
 
     public void LoadShopScene()
@@ -35,6 +47,11 @@ public class Scene_Manager : Singleton<Scene_Manager>
     public void LoadLevelScene()
     {
         SceneManager.LoadScene("LevelScene");
+    }
+
+    public void LoadGameScene()
+    {
+        SceneManager.LoadScene("GameScene");
     }
 }
 

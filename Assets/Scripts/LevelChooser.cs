@@ -8,6 +8,8 @@ using TMPro;
 [System.Serializable]
 public class LevelChooser : MonoBehaviour
 {
+    public static Action ActionLevelButton;
+
     [SerializeField] TextMeshProUGUI currentLevelText;
     [SerializeField] Slider starsSlider;
     [SerializeField] GameObject adUnlockButton;
@@ -19,5 +21,13 @@ public class LevelChooser : MonoBehaviour
         starsSlider.value = stars;
         adUnlockButton.SetActive(!unlocked);
         image.sprite = sprite;
+    }
+
+    public void OnLevelButtonClick()
+    {
+        if(ActionLevelButton != null)
+        {
+            ActionLevelButton();
+        }
     }
 }
