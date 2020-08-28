@@ -16,10 +16,13 @@ public class UiGuns : MonoBehaviour
 
     Queue<GameObject> gunsQueue = new Queue<GameObject>();
 
+
+
     bool isMoveRight = true;
     bool isMoveLeft = false;
 
     float rotationX, rotationY;
+    bool isPressed = false;
 
     void Awake()
     {
@@ -27,6 +30,13 @@ public class UiGuns : MonoBehaviour
         {
             gunsQueue.Enqueue(g);
         }
+    }
+
+    void Start()
+    {
+        Scene_Manager.Instance.inputControl.UiGuns.Press.performed += cnt => OnPressed();
+        Scene_Manager.Instance.inputControl.UiGuns.Release.performed += cnt => OnReleased();
+        Scene_Manager.Instance.inputControl.UiGuns.PosDelta.performed += cnt => SetAxisDelta(cnt.ReadValue<Vector2>());
     }
 
     void OnEnable()
@@ -49,22 +59,6 @@ public class UiGuns : MonoBehaviour
     void OnPreviousGunAction()
     {
         animator.Play(moveGunRightClip.name);
-    }
-
-    void Update()
-    {
-        rotationX = Input.GetAxis("Mouse X") * 2;
-        rotationY = Input.GetAxis("Mouse Y") * 2;
-
-        var currentRot = gunsParentY.transform.localRotation;
-        currentRot.z = Mathf.Clamp(currentRot.z, -0.1f, 0.1f);
-        gunsParentY.transform.localRotation = currentRot;
-
-        if (Input.GetMouseButton(0))
-        {
-            gunsParentY.transform.DOBlendableLocalRotateBy(Vector3.back * rotationY, 1f);
-            gunsParentX.transform.DOBlendableLocalRotateBy(Vector3.down * rotationX, 1f);
-        }
     }
 
     void DisableGunsCamera(int dir)
@@ -100,5 +94,53 @@ public class UiGuns : MonoBehaviour
         }
         gunsQueue.Enqueue(gun);
         gunsQueue.Peek().SetActive(true);
+    }
+
+    void OnPressed()
+    {
+        isPressed = true;
+    }
+
+    void OnReleased()
+    {
+        isPressed = false;
+    }
+
+    void SetAxisDelta(Vector2 delta)
+    {
+        rotationX = delta.x;
+        rotationY = delta.y;
+
+        float rotZ = gunsParentY.transform.localEulerAngles.z;
+
+        bool isWithinBounds = rotZ >= 80 && rotZ <= 120;
+
+        if (isPressed && isWithinBounds)
+        {
+            if (gunsParentY.transform != null && gunsParentX.transform != null)
+            {
+                gunsParentY.transform.DOBlendableLocalRotateBy(Vector3.back * rotationY, 0.5f);
+                gunsParentX.transform.DOBlendableLocalRotateBy(Vector3.down * rotationX, 0.5f);
+            }
+        }
+    }
+
+    void Update()
+    {
+        float rotZ = gunsParentY.transform.localEulerAngles.z;
+        if (rotZ > 120)
+        {
+            gunsParentY.transform.localEulerAngles = Vector3.Lerp(gunsParentY.transform.localEulerAngles, Vector3.forward * 119, 1f);
+        }
+        if (rotZ < 80)
+        {
+            gunsParentY.transform.localEulerAngles = Vector3.Lerp(gunsParentY.transform.localEulerAngles, Vector3.forward * 81, 1f);
+        }
+    }
+
+    void OnDestroy()
+    {
+        DOTween.Kill(gunsParentX.transform);
+        DOTween.Kill(gunsParentY.transform);
     }
 }

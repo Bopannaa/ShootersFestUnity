@@ -8,12 +8,19 @@ public class Scene_Manager : Singleton<Scene_Manager>
 {   
     public Action CreatePersistableObjects; 
 
+    public InputControl inputControl;
+
     void Start()
     {
         if(CreatePersistableObjects != null)
         {
             CreatePersistableObjects();
         }
+    }
+
+    void Awake()
+    {
+        inputControl = new InputControl();
     }
 
     public void OnEnable()
@@ -23,6 +30,7 @@ public class Scene_Manager : Singleton<Scene_Manager>
         StartScene.ActionPlayButton += LoadLevelScene;
         LevelScene.ActionBackButton += LoadStartScene;
         LevelChooser.ActionLevelButton += LoadGameScene;
+        inputControl.Enable();
     }
 
     void OnDisable()
@@ -32,6 +40,7 @@ public class Scene_Manager : Singleton<Scene_Manager>
         StartScene.ActionPlayButton -= LoadLevelScene;
         LevelScene.ActionBackButton -= LoadStartScene;
         LevelChooser.ActionLevelButton -= LoadGameScene;
+        inputControl.Disable();
     }
 
     public void LoadShopScene()

@@ -39,6 +39,9 @@ public class Chapter : MonoBehaviour
             var levelChooser = Instantiate(levelChooserPrefab);
             levelChooser.transform.SetParent(levelChooserParent);
             levelChooser.transform.localScale = Vector3.one;
+            var pos = levelChooser.transform.position;
+            pos.z = 0;
+            levelChooser.transform.localPosition = pos;
             if (ActionReset != null)
             {
                 ActionReset(levelChooser, i + ((currentChapter - 1) * 10) + 1);
