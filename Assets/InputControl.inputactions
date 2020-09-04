@@ -28,6 +28,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "TouchPos",
+                    "type": "Value",
+                    "id": "c5c6b0f6-a7d8-4016-a352-5b0e51612513",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -80,7 +88,7 @@
                     "id": "4f270b5c-226f-490f-8867-a8a6e443d9ce",
                     "path": "<Mouse>/delta",
                     "interactions": "",
-                    "processors": "NormalizeVector2",
+                    "processors": "ScaleVector2(x=10,y=10)",
                     "groups": "",
                     "action": "PosDelta",
                     "isComposite": false,
@@ -91,9 +99,31 @@
                     "id": "79fcb0b4-83a5-42ed-a475-8efbc21ace9e",
                     "path": "<Touchscreen>/delta",
                     "interactions": "",
-                    "processors": "NormalizeVector2",
+                    "processors": "",
                     "groups": "",
                     "action": "PosDelta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "76ff5f26-c749-4584-afc2-3bdbfa804021",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TouchPos",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d3cb9fad-7c86-4c6e-8871-9ab1f7ae4f3e",
+                    "path": "<Touchscreen>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TouchPos",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

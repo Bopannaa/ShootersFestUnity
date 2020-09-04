@@ -41,6 +41,14 @@ public class @InputControl : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""TouchPos"",
+                    ""type"": ""Value"",
+                    ""id"": ""c5c6b0f6-a7d8-4016-a352-5b0e51612513"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -93,7 +101,7 @@ public class @InputControl : IInputActionCollection, IDisposable
                     ""id"": ""4f270b5c-226f-490f-8867-a8a6e443d9ce"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
-                    ""processors"": ""NormalizeVector2"",
+                    ""processors"": ""ScaleVector2(x=10,y=10)"",
                     ""groups"": """",
                     ""action"": ""PosDelta"",
                     ""isComposite"": false,
@@ -104,9 +112,31 @@ public class @InputControl : IInputActionCollection, IDisposable
                     ""id"": ""79fcb0b4-83a5-42ed-a475-8efbc21ace9e"",
                     ""path"": ""<Touchscreen>/delta"",
                     ""interactions"": """",
-                    ""processors"": ""NormalizeVector2"",
+                    ""processors"": """",
                     ""groups"": """",
                     ""action"": ""PosDelta"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""76ff5f26-c749-4584-afc2-3bdbfa804021"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TouchPos"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d3cb9fad-7c86-4c6e-8871-9ab1f7ae4f3e"",
+                    ""path"": ""<Touchscreen>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TouchPos"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -120,6 +150,7 @@ public class @InputControl : IInputActionCollection, IDisposable
         m_UiGuns_Press = m_UiGuns.FindAction("Press", throwIfNotFound: true);
         m_UiGuns_Release = m_UiGuns.FindAction("Release", throwIfNotFound: true);
         m_UiGuns_PosDelta = m_UiGuns.FindAction("PosDelta", throwIfNotFound: true);
+        m_UiGuns_TouchPos = m_UiGuns.FindAction("TouchPos", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -172,6 +203,7 @@ public class @InputControl : IInputActionCollection, IDisposable
     private readonly InputAction m_UiGuns_Press;
     private readonly InputAction m_UiGuns_Release;
     private readonly InputAction m_UiGuns_PosDelta;
+    private readonly InputAction m_UiGuns_TouchPos;
     public struct UiGunsActions
     {
         private @InputControl m_Wrapper;
@@ -179,6 +211,7 @@ public class @InputControl : IInputActionCollection, IDisposable
         public InputAction @Press => m_Wrapper.m_UiGuns_Press;
         public InputAction @Release => m_Wrapper.m_UiGuns_Release;
         public InputAction @PosDelta => m_Wrapper.m_UiGuns_PosDelta;
+        public InputAction @TouchPos => m_Wrapper.m_UiGuns_TouchPos;
         public InputActionMap Get() { return m_Wrapper.m_UiGuns; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -197,6 +230,9 @@ public class @InputControl : IInputActionCollection, IDisposable
                 @PosDelta.started -= m_Wrapper.m_UiGunsActionsCallbackInterface.OnPosDelta;
                 @PosDelta.performed -= m_Wrapper.m_UiGunsActionsCallbackInterface.OnPosDelta;
                 @PosDelta.canceled -= m_Wrapper.m_UiGunsActionsCallbackInterface.OnPosDelta;
+                @TouchPos.started -= m_Wrapper.m_UiGunsActionsCallbackInterface.OnTouchPos;
+                @TouchPos.performed -= m_Wrapper.m_UiGunsActionsCallbackInterface.OnTouchPos;
+                @TouchPos.canceled -= m_Wrapper.m_UiGunsActionsCallbackInterface.OnTouchPos;
             }
             m_Wrapper.m_UiGunsActionsCallbackInterface = instance;
             if (instance != null)
@@ -210,6 +246,9 @@ public class @InputControl : IInputActionCollection, IDisposable
                 @PosDelta.started += instance.OnPosDelta;
                 @PosDelta.performed += instance.OnPosDelta;
                 @PosDelta.canceled += instance.OnPosDelta;
+                @TouchPos.started += instance.OnTouchPos;
+                @TouchPos.performed += instance.OnTouchPos;
+                @TouchPos.canceled += instance.OnTouchPos;
             }
         }
     }
@@ -219,5 +258,6 @@ public class @InputControl : IInputActionCollection, IDisposable
         void OnPress(InputAction.CallbackContext context);
         void OnRelease(InputAction.CallbackContext context);
         void OnPosDelta(InputAction.CallbackContext context);
+        void OnTouchPos(InputAction.CallbackContext context);
     }
 }

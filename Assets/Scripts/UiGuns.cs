@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System.Linq;
@@ -14,15 +13,32 @@ public class UiGuns : MonoBehaviour
 
     [SerializeField] private GameObject[] guns;
 
+    [Range(1, 100)]
+    [SerializeField] private int rotSpeed = 10;
+
+    [SerializeField]
+    float rotationX = 0.0f;
+
+    [SerializeField]
+    float rotationY = 90.0f;
+
+    [SerializeField]
+    GameObject indicatorL, indicatorR;
+
+    Vector3 indicatorLpos, indicatorRpos;
+
     Queue<GameObject> gunsQueue = new Queue<GameObject>();
-
-
 
     bool isMoveRight = true;
     bool isMoveLeft = false;
 
-    float rotationX, rotationY;
     bool isPressed = false;
+
+    Vector3 uigunXrot;
+    Vector3 uigunYrot;
+
+    enum GunSide { RIGHT, LEFT };
+    GunSide gunside;
 
     void Awake()
     {
@@ -30,6 +46,10 @@ public class UiGuns : MonoBehaviour
         {
             gunsQueue.Enqueue(g);
         }
+        uigunXrot = Vector3.down * rotationX;
+        uigunYrot = Vector3.forward * rotationY;
+        gunside = GunSide.LEFT;
+
     }
 
     void Start()
@@ -37,6 +57,7 @@ public class UiGuns : MonoBehaviour
         Scene_Manager.Instance.inputControl.UiGuns.Press.performed += cnt => OnPressed();
         Scene_Manager.Instance.inputControl.UiGuns.Release.performed += cnt => OnReleased();
         Scene_Manager.Instance.inputControl.UiGuns.PosDelta.performed += cnt => SetAxisDelta(cnt.ReadValue<Vector2>());
+        Scene_Manager.Instance.inputControl.UiGuns.TouchPos.performed += cnt => SetSide(cnt.ReadValue<Vector2>());
     }
 
     void OnEnable()
@@ -82,8 +103,12 @@ public class UiGuns : MonoBehaviour
 
     void ResetGuns(bool direction)
     {
-        gunsParentX.transform.localEulerAngles = new Vector3(0f, -50f, 0f);
-        gunsParentY.transform.localEulerAngles = new Vector3(0f, 0f, -3.5f);
+        rotationX = 50f;
+        rotationY = 85f;
+        uigunXrot = Vector3.down * rotationX;
+        uigunYrot = Vector3.forward * rotationY;
+        DOTween.KillAll();
+
         var gun = gunsQueue.Dequeue();
         gun.SetActive(false);
         if (direction)
@@ -108,39 +133,45 @@ public class UiGuns : MonoBehaviour
 
     void SetAxisDelta(Vector2 delta)
     {
-        rotationX = delta.x;
-        rotationY = delta.y;
-
-        float rotZ = gunsParentY.transform.localEulerAngles.z;
-
-        bool isWithinBounds = rotZ >= 80 && rotZ <= 120;
-
-        if (isPressed && isWithinBounds)
+        if (isPressed)
         {
-            if (gunsParentY.transform != null && gunsParentX.transform != null)
+            if (gunside == GunSide.LEFT)
             {
-                gunsParentY.transform.DOBlendableLocalRotateBy(Vector3.back * rotationY, 0.5f);
-                gunsParentX.transform.DOBlendableLocalRotateBy(Vector3.down * rotationX, 0.5f);
+                rotationX += delta.x * rotSpeed * Time.deltaTime;
+                rotationY -= delta.y * rotSpeed * Time.deltaTime;
+            }
+            else
+            {
+                rotationX += delta.x * rotSpeed * Time.deltaTime;
+                rotationY += delta.y * rotSpeed * Time.deltaTime;
             }
         }
     }
 
+    void SetSide(Vector2 mousePos)
+    {
+        float disL = Vector3.Distance(indicatorLpos, mousePos);
+        float disR = Vector3.Distance(indicatorRpos, mousePos);
+
+        if (disL > disR) gunside = GunSide.LEFT;
+        else gunside = GunSide.RIGHT;
+
+    }
+
     void Update()
     {
-        float rotZ = gunsParentY.transform.localEulerAngles.z;
-        if (rotZ > 120)
-        {
-            gunsParentY.transform.localEulerAngles = Vector3.Lerp(gunsParentY.transform.localEulerAngles, Vector3.forward * 119, 1f);
-        }
-        if (rotZ < 80)
-        {
-            gunsParentY.transform.localEulerAngles = Vector3.Lerp(gunsParentY.transform.localEulerAngles, Vector3.forward * 81, 1f);
-        }
+        indicatorLpos = gunsCamera.WorldToScreenPoint(indicatorL.transform.position);
+        indicatorRpos = gunsCamera.WorldToScreenPoint(indicatorR.transform.position);
+
+        if (rotationY > 120) rotationY = 120;
+        if (rotationY < 80) rotationY = 80;
+        DOTween.To(() => uigunXrot, x => uigunXrot = x, Vector3.down * rotationX, 1f);
+        DOTween.To(() => uigunYrot, y => uigunYrot = y, Vector3.forward * rotationY, 1f);
+        gunsParentX.transform.localEulerAngles = uigunXrot;
+        gunsParentY.transform.localEulerAngles = uigunYrot;
     }
 
     void OnDestroy()
     {
-        DOTween.Kill(gunsParentX.transform);
-        DOTween.Kill(gunsParentY.transform);
     }
 }

@@ -30,6 +30,7 @@ public class Scene_Manager : Singleton<Scene_Manager>
         StartScene.ActionPlayButton += LoadLevelScene;
         LevelScene.ActionBackButton += LoadStartScene;
         LevelChooser.ActionLevelButton += LoadGameScene;
+        StartScene.ActionQuitButton += QuitGame;
         inputControl.Enable();
     }
 
@@ -40,6 +41,7 @@ public class Scene_Manager : Singleton<Scene_Manager>
         StartScene.ActionPlayButton -= LoadLevelScene;
         LevelScene.ActionBackButton -= LoadStartScene;
         LevelChooser.ActionLevelButton -= LoadGameScene;
+        StartScene.ActionQuitButton -= QuitGame;
         inputControl.Disable();
     }
 
@@ -61,6 +63,11 @@ public class Scene_Manager : Singleton<Scene_Manager>
     public void LoadGameScene()
     {
         SceneManager.LoadScene("GameScene");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
 
