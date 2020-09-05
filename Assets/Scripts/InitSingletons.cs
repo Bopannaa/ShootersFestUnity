@@ -5,12 +5,14 @@ using UnityEngine;
 public class InitSingletons : MonoBehaviour
 {
     Scene_Manager scene_Manager;
+    Game_Manager game_Manager;
     public GameObject worlEnv;
     public GameObject player;
 
     void Awake()
     {
         scene_Manager = Scene_Manager.Instance;
+        game_Manager = Game_Manager.Instance;
     }
 
     void OnEnable()
@@ -25,7 +27,7 @@ public class InitSingletons : MonoBehaviour
 
     void CreateSingletonObjects()
     {
-        Instantiate(worlEnv, Vector3.zero, Quaternion.identity, scene_Manager.transform);
+        Instantiate(worlEnv, new Vector3(0, -1, 11), Quaternion.identity, scene_Manager.transform);
         Instantiate(player, Vector3.zero, Quaternion.identity, scene_Manager.transform);
     }
 }

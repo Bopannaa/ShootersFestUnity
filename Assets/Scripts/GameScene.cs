@@ -8,6 +8,12 @@ public class GameScene : MonoBehaviour
     public static Action ActionPauseButton;
     public static Action ActionShootButton;
     public static Action ActionSwapButton;
+
+    void Start()
+    {
+        Game_Manager.Instance.ResetGame();
+        Game_Manager.Instance.ResumeGame();
+    }
     
     public void OnPauseButtonClick()
     {
@@ -31,5 +37,11 @@ public class GameScene : MonoBehaviour
         {
             ActionSwapButton();
         }
+    }
+
+    void OnDestroy()
+    {
+        Game_Manager.Instance.PauseGame();
+        Game_Manager.Instance.ResetGame();
     }
 }
