@@ -889,7 +889,7 @@ MonoBehaviour:
   - {fileID: 1130796399}
   - {fileID: 1930541374}
   - {fileID: 527825078}
-  rotSpeed: 1
+  rotSpeed: 2
   rotationX: 50
   rotationY: 85
   indicatorL: {fileID: 1814641332}
