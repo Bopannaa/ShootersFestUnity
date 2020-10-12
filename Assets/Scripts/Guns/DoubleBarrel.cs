@@ -4,46 +4,40 @@ using UnityEngine;
 
 public class DoubleBarrel : Gun
 {
-    [SerializeField]
-    private AnimationClip singleShootAnimation;
-
-    [SerializeField]
-    private AnimationClip bothShootAnimation;
-
-    [SerializeField]
-    private AnimationClip bothIdleAnimation;
-
-    [SerializeField]
-    private AnimationClip singleIdleAnimation;
-
-    [SerializeField]
-    private AnimationClip bothStillAnimation;
-
-    [SerializeField]
-    private AnimationClip singleStillAnimation;
-
-    [SerializeField]
-    private AnimationClip reloadAnimation;
-
-    public override void Reload()
-    {
-        Debug.Log("Reload");
-        remainingShots = maxShots;
-        isReloading = false;
-    }
-
     public override void Shoot()
     {
-        if (!isReloading)
+        if (this.gameObject.activeInHierarchy == true)
         {
-            Debug.Log("Shoot");
-            animator.Play(singleShootAnimation.name);
-            remainingShots--;
-            if (remainingShots <= 0)
+            if (!isAnimPlaying)
             {
-                isReloading = true;
-                Reload();
+                isAnimPlaying = true;
+                animator.SetTrigger("Shoot");
             }
+
         }
     }
+
+    protected override void OnAnimationFinished()
+    {
+        isAnimPlaying = false;
+    }
+
+    protected override void OnPressed()
+    {
+
+        if (this.gameObject.activeInHierarchy == true)
+        {
+
+            animator.SetBool("IsIdle", false);
+        }
+    }
+
+    protected override void OnReleased()
+    {
+        if (this.gameObject.activeInHierarchy == true)
+        {
+            animator.SetBool("IsIdle", true);
+        }
+    }
+
 }

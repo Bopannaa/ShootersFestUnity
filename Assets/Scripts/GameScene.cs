@@ -8,6 +8,7 @@ public class GameScene : MonoBehaviour
     public static Action ActionPauseButton;
     public static Action ActionShootButton;
     public static Action ActionSwapButton;
+    public static Action ActionShootButtonRelease;
 
     void Start()
     {
@@ -31,6 +32,14 @@ public class GameScene : MonoBehaviour
         }
     }
     
+    public void OnShootButtonRelease()
+    {
+        if(ActionShootButtonRelease != null)
+        {
+            ActionShootButtonRelease();
+        }
+    }
+
     public void OnSwapButtonClick()
     {
         if(ActionSwapButton != null)

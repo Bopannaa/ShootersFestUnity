@@ -18,6 +18,7 @@ public class GunManager : MonoBehaviour
         Game_Manager.Instance.ActionResumeGame += EnableGuns;
         GameScene.ActionSwapButton += SwapGun;
         GameScene.ActionShootButton += Shoot;
+        Scene_Manager.Instance.inputControl.Player.Shoot.performed += ctx => Shoot();
     }
 
     void OnDisable()

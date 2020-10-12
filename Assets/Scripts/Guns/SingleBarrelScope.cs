@@ -4,13 +4,36 @@ using UnityEngine;
 
 public class SingleBarrelScope : Gun
 {
-    public override void Reload()
+public override void Shoot()
     {
-        throw new System.NotImplementedException();
+        if (this.gameObject.activeInHierarchy == true)
+        {
+            if (!isAnimPlaying)
+            {
+                isAnimPlaying = true;
+                animator.SetTrigger("Shoot");
+            }
+        }
     }
 
-    public override void Shoot()
+    protected override void OnAnimationFinished()
     {
-        throw new System.NotImplementedException();
+        isAnimPlaying = false;
+    }
+
+    protected override void OnPressed()
+    {
+        if (this.gameObject.activeInHierarchy == true)
+        {
+            animator.SetBool("IsIdle", false);
+        }
+    }
+
+    protected override void OnReleased()
+    {
+        if (this.gameObject.activeInHierarchy == true)
+        {
+            animator.SetBool("IsIdle", true);
+        }
     }
 }

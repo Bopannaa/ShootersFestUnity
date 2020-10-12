@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 [RequireComponent(typeof(Animator))]
 public abstract class Gun : MonoBehaviour
@@ -9,28 +10,28 @@ public abstract class Gun : MonoBehaviour
     Transform currentTransform;
 
     [SerializeField]
-    protected int maxShots;
-
-    protected int remainingShots;
-    protected bool isReloading = false;
+    protected Animator animator;
 
     [SerializeField]
-    protected Animator animator;
+    protected bool isAnimPlaying = false;
 
     void Awake()
     {
-        remainingShots = maxShots;
         animator = transform.GetComponent<Animator>();
+        Scene_Manager.Instance.inputControl.Player.Press.performed += cxt => OnPressed();
+        Scene_Manager.Instance.inputControl.Player.Release.performed += cxt => OnReleased();
     }
 
     void OnEnable()
     {
         currentTransform = this.transform;
-        currentTransform.DOMove(currentTransform.localPosition + Vector3.down *  1f, 0.3f).From();
+        currentTransform.DOMove(currentTransform.localPosition + Vector3.down * 1f, 0.3f).From();
+        AnimatorBehavoiur.ActionFinishAnimation += OnAnimationFinished;
     }
 
     void OnDisable()
     {
+        AnimatorBehavoiur.ActionFinishAnimation -= OnAnimationFinished;
         DOTween.Kill(currentTransform);
     }
 
@@ -40,5 +41,11 @@ public abstract class Gun : MonoBehaviour
     }
 
     public abstract void Shoot();
-    public abstract void Reload();
+
+    protected abstract void OnPressed();
+
+    protected abstract void OnReleased();
+
+    protected abstract void OnAnimationFinished();
+
 }
