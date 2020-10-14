@@ -34,11 +34,11 @@ public class LevelManager : MonoBehaviour
     {
         if (level <= currentUnlockedLevel)
         {
-            levelChooser.Reset(level, 0, true, GetSpriteByLevel(level - 1));
+            levelChooser.Reset(level, PersistentStorage.Instance.levelStar[level - 1], true, GetSpriteByLevel(level - 1));
         }
         else
         {
-            levelChooser.Reset(level, 1, false, lockedSprite);
+            levelChooser.Reset(level, 0, false, lockedSprite);
         }
     }
 

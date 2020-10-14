@@ -1,0 +1,167 @@
+{
+    "levelData": {
+      "levels": [
+        {
+          "name": "Level: 1",
+          "time": 15.0,
+          "targetCount": 1,
+          "bulletsCount": 100
+        },
+        {
+          "name": "Level: 2",
+          "time": 35.0,
+          "targetCount": 3,
+          "bulletsCount": 100
+        },
+        {
+          "name": "Level: 3",
+          "time": 100.0,
+          "targetCount": 11,
+          "bulletsCount": 100
+        },
+        {
+          "name": "Level: 4",
+          "time": 35.0,
+          "targetCount": 8,
+          "bulletsCount": 100
+        },
+        {
+          "name": "Level: 5",
+          "time": 45.0,
+          "targetCount": 8,
+          "bulletsCount": 100
+        },
+        {
+          "name": "Level: 6",
+          "time": 120.0,
+          "targetCount": 12,
+          "bulletsCount": 100
+        },
+        {
+          "name": "Level: 7",
+          "time": 50.0,
+          "targetCount": 12,
+          "bulletsCount": 100
+        },
+        {
+          "name": "Level: 8",
+          "time": 50.0,
+          "targetCount": 8,
+          "bulletsCount": 100
+        },
+        {
+          "name": "Level: 9",
+          "time": 40.0,
+          "targetCount": 4,
+          "bulletsCount": 100
+        },
+        {
+          "name": "Level: 10",
+          "time": 40.0,
+          "targetCount": 10,
+          "bulletsCount": 100
+        },
+        {
+          "name": "Level: 11",
+          "time": 100.0,
+          "targetCount": 8,
+          "bulletsCount": 100
+        },
+        {
+          "name": "Level: 12",
+          "time": 120.0,
+          "targetCount": 16,
+          "bulletsCount": 100
+        },
+        {
+          "name": "Level: 13",
+          "time": 50.0,
+          "targetCount": 14,
+          "bulletsCount": 100
+        },
+        {
+          "name": "Level: 14",
+          "time": 58.0,
+          "targetCount": 7,
+          "bulletsCount": 100
+        },
+        {
+          "name": "Level: 15",
+          "time": 120.0,
+          "targetCount": 5,
+          "bulletsCount": 100
+        },
+        {
+          "name": "Level: 16",
+          "time": 58.0,
+          "targetCount": 10,
+          "bulletsCount": 100
+        },
+        {
+          "name": "Level: 17",
+          "time": 58.0,
+          "targetCount": 7,
+          "bulletsCount": 100
+        },
+        {
+          "name": "Level: 18",
+          "time": 35.0,
+          "targetCount": 6,
+          "bulletsCount": 100
+        },
+        {
+          "name": "Level: 19",
+          "time": 120.0,
+          "targetCount": 18,
+          "bulletsCount": 100
+        },
+        {
+          "name": "Level: 20",
+          "time": 120.0,
+          "targetCount": 25,
+          "bulletsCount": 100
+        },
+        {
+          "name": "Level: 21",
+          "time": 120.0,
+          "targetCount": 5,
+          "bulletsCount": 100
+        },
+        {
+          "name": "Level: 22",
+          "time": 120.0,
+          "targetCount": 25
+        },
+        {
+          "name": "Level: 23",
+          "time": 120.0,
+          "targetCount": 9
+        },
+        {
+          "name": "Level: 24",
+          "time": 45.0,
+          "targetCount": 9
+        },
+        {
+          "name": "Level: 25",
+          "time": 45.0,
+          "targetCount": 9
+        },
+        {
+          "name": "Level: 26",
+          "time": 120.0,
+          "targetCount": 25
+        },
+        {
+          "name": "Level: 27",
+          "time": 120.0,
+          "targetCount": 16
+        },
+        {
+          "name": "Level: 28",
+          "time": 120.0,
+          "targetCount": 25
+        }
+      ]
+    }
+}

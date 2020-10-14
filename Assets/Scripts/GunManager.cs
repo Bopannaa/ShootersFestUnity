@@ -14,8 +14,8 @@ public class GunManager : MonoBehaviour
 
     void OnEnable()
     {
-        Game_Manager.Instance.ActionPauseGame += DisableGuns;
-        Game_Manager.Instance.ActionResumeGame += EnableGuns;
+        //Game_Manager.Instance.ActionPauseGame += DisableGuns;
+        //Game_Manager.Instance.ActionResumeGame += EnableGuns;
         GameScene.ActionSwapButton += SwapGun;
         GameScene.ActionShootButton += Shoot;
         Scene_Manager.Instance.inputControl.Player.Shoot.performed += ctx => Shoot();
@@ -23,8 +23,8 @@ public class GunManager : MonoBehaviour
 
     void OnDisable()
     {
-        Game_Manager.Instance.ActionPauseGame -= DisableGuns;
-        Game_Manager.Instance.ActionResumeGame -= EnableGuns;
+        //Game_Manager.Instance.ActionPauseGame -= DisableGuns;
+        //Game_Manager.Instance.ActionResumeGame -= EnableGuns;
         GameScene.ActionSwapButton -= SwapGun;
         GameScene.ActionShootButton -= Shoot;
     }

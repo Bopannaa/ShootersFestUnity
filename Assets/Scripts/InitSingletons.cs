@@ -6,6 +6,7 @@ public class InitSingletons : MonoBehaviour
 {
     Scene_Manager scene_Manager;
     Game_Manager game_Manager;
+    PersistentStorage persistentStorage;
     public GameObject worlEnv;
     public GameObject player;
 
@@ -13,6 +14,10 @@ public class InitSingletons : MonoBehaviour
     {
         scene_Manager = Scene_Manager.Instance;
         game_Manager = Game_Manager.Instance;
+        persistentStorage = PersistentStorage.Instance;
+        persistentStorage.Load();
+        persistentStorage.levelStar[5] = 1.0f;
+        persistentStorage.Save();
     }
 
     void OnEnable()
