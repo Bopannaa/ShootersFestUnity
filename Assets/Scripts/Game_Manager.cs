@@ -8,6 +8,7 @@ public class Game_Manager : Singleton<Game_Manager>
     public Action ActionPauseGame;
     public Action ActionResumeGame;
     public Action ActionResetGame;
+    public Action<int> ActionCreateLevel;
 
     void OnEnable()
     {
@@ -49,6 +50,14 @@ public class Game_Manager : Singleton<Game_Manager>
         if(ActionResetGame != null)
         {
             ActionResetGame();
+        }
+    }
+
+    public void CreateLevel(int level)
+    {
+        if(ActionCreateLevel != null)
+        {
+            ActionCreateLevel(level);
         }
     }
 }
