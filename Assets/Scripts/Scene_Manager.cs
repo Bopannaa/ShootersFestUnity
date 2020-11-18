@@ -5,16 +5,16 @@ using UnityEngine.SceneManagement;
 using System;
 
 public class Scene_Manager : Singleton<Scene_Manager>
-{   
-    public Action CreatePersistableObjects; 
+{
+    public Action CreatePersistableObjects;
 
     public InputControl inputControl;
 
     void Start()
     {
-        if(CreatePersistableObjects != null)
+        if (CreatePersistableObjects != null)
         {
-            CreatePersistableObjects();
+            //CreatePersistableObjects();
         }
     }
 
@@ -25,25 +25,36 @@ public class Scene_Manager : Singleton<Scene_Manager>
 
     public void OnEnable()
     {
-        ShopScene.ActionBackButton  += LoadStartScene;
         StartScene.ActionShopButton += LoadShopScene;
         StartScene.ActionPlayButton += LoadLevelScene;
-        LevelScene.ActionBackButton += LoadStartScene;
-        LevelChooser.ActionLevelButton += LoadGameScene;
         StartScene.ActionQuitButton += QuitGame;
-        GameScene.ActionPauseButton += LoadStartScene; // to be removed
+
+        ShopScene.ActionBackButton += LoadStartScene;
+
+        LevelScene.ActionBackButton += LoadStartScene;
+
+        //LevelChooser.ActionLevelButton += LoadGameScene;
+
+        //GameScene.ActionPauseButton += LoadStartScene; // to be removed
+
         inputControl.Enable();
     }
 
     void OnDisable()
     {
-        ShopScene.ActionBackButton  -= LoadStartScene;
         StartScene.ActionShopButton -= LoadShopScene;
-        StartScene.ActionPlayButton -= LoadLevelScene;
-        LevelScene.ActionBackButton -= LoadStartScene;
-        LevelChooser.ActionLevelButton -= LoadGameScene;
         StartScene.ActionQuitButton -= QuitGame;
-        GameScene.ActionPauseButton -= LoadStartScene; // to be removed
+        StartScene.ActionPlayButton -= LoadLevelScene;
+
+        LevelScene.ActionBackButton -= LoadStartScene;
+        
+        ShopScene.ActionBackButton -= LoadStartScene;
+
+        //LevelChooser.ActionLevelButton -= LoadGameScene;
+
+
+        //GameScene.ActionPauseButton -= LoadStartScene; // to be removed
+        
         inputControl.Disable();
     }
 

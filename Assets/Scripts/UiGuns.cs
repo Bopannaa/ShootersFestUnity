@@ -138,12 +138,12 @@ public class UiGuns : MonoBehaviour
             if (gunside == GunSide.LEFT)
             {
                 rotationX += delta.x * rotSpeed * Time.deltaTime;
-                rotationY -= delta.y * rotSpeed * Time.deltaTime;
+                //rotationY -= delta.y * rotSpeed * Time.deltaTime;
             }
             else
             {
                 rotationX += delta.x * rotSpeed * Time.deltaTime;
-                rotationY += delta.y * rotSpeed * Time.deltaTime;
+                //rotationY += delta.y * rotSpeed * Time.deltaTime;
             }
         }
     }
