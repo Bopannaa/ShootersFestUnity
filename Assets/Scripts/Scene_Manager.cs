@@ -62,7 +62,7 @@ public class Scene_Manager : Singleton<Scene_Manager>
         SceneManager.LoadScene("LevelScene");
     }
 
-    public void LoadGameScene()
+    public void LoadGameScene(int level)
     {
         SceneManager.LoadScene("GameScene");
     }

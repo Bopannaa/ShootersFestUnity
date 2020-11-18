@@ -8,16 +8,20 @@ using TMPro;
 [System.Serializable]
 public class LevelChooser : MonoBehaviour
 {
-    public static Action ActionLevelButton;
+    public static Action<int> ActionLevelButton;
+    public static Action ActionNoCredit;
 
     [SerializeField] TextMeshProUGUI currentLevelText;
     [SerializeField] Slider starsSlider;
     [SerializeField] GameObject adUnlockButton;
     [SerializeField] Image image;
 
+    public int Level { get; private set;}
+
     public void Reset(int level, float stars, bool unlocked, Sprite sprite)
     {
         currentLevelText.text = level.ToString();
+        Level = level;
         starsSlider.value = stars;
         adUnlockButton.SetActive(!unlocked);
         image.sprite = sprite;
@@ -25,9 +29,20 @@ public class LevelChooser : MonoBehaviour
 
     public void OnLevelButtonClick()
     {
-        if(ActionLevelButton != null)
+        if (PersistentStorage.Instance.coins > 0)
         {
-            ActionLevelButton();
+            if (ActionLevelButton != null)
+            {
+                ActionLevelButton(Level);
+            }
         }
+        else
+        {
+            if (ActionNoCredit != null)
+            {
+                ActionNoCredit();
+            }
+        }
+
     }
 }

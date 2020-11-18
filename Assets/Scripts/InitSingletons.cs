@@ -9,6 +9,7 @@ public class InitSingletons : MonoBehaviour
     PersistentStorage persistentStorage;
     public GameObject worlEnv;
     public GameObject player;
+    public GameObject globalPopupsPrefab;
 
     void Awake()
     {
@@ -33,6 +34,7 @@ public class InitSingletons : MonoBehaviour
     void CreateSingletonObjects()
     {
         Instantiate(worlEnv, new Vector3(0, -1, 11), Quaternion.identity, scene_Manager.transform);
-        Instantiate(player, Vector3.zero, Quaternion.identity, scene_Manager.transform);
+        //Instantiate(player, Vector3.zero, Quaternion.identity, scene_Manager.transform);
+        Instantiate(globalPopupsPrefab,Vector3.zero, Quaternion.identity, scene_Manager.transform);
     }
 }
