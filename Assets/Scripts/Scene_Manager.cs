@@ -14,7 +14,7 @@ public class Scene_Manager : Singleton<Scene_Manager>
     {
         if (CreatePersistableObjects != null)
         {
-            //CreatePersistableObjects();
+            CreatePersistableObjects();
         }
     }
 
@@ -33,7 +33,7 @@ public class Scene_Manager : Singleton<Scene_Manager>
 
         LevelScene.ActionBackButton += LoadStartScene;
 
-        LevelChooser.ActionLevelButton += LoadGameScene;
+        //LevelChooser.ActionLevelButton += LoadGameScene;
 
         //GameScene.ActionPauseButton += LoadStartScene; // to be removed
 
@@ -50,7 +50,7 @@ public class Scene_Manager : Singleton<Scene_Manager>
         
         ShopScene.ActionBackButton -= LoadStartScene;
 
-        LevelChooser.ActionLevelButton -= LoadGameScene;
+        //LevelChooser.ActionLevelButton -= LoadGameScene;
 
 
         //GameScene.ActionPauseButton -= LoadStartScene; // to be removed

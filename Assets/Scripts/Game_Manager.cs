@@ -11,7 +11,6 @@ public class Game_Manager : Singleton<Game_Manager>
 
     void OnEnable()
     {
-        LevelChooser.ActionLevelButton += CreateLevel;
     }
 
     void OnDisable()
@@ -50,10 +49,5 @@ public class Game_Manager : Singleton<Game_Manager>
         {
             ActionResetGame();
         }
-    }
-
-    void CreateLevel(int level)
-    {
-        Debug.Log("Clicked level: " + level);
     }
 }

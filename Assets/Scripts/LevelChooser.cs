@@ -8,7 +8,7 @@ using TMPro;
 [System.Serializable]
 public class LevelChooser : MonoBehaviour
 {
-    public static Action<int> ActionLevelButton;
+    public static Action<int, int, float> ActionLevelButton;
     public static Action ActionNoCredit;
 
     [SerializeField] TextMeshProUGUI currentLevelText;
@@ -33,7 +33,7 @@ public class LevelChooser : MonoBehaviour
         {
             if (ActionLevelButton != null)
             {
-                ActionLevelButton(Level);
+                ActionLevelButton(Level, 10, 5.6f);
             }
         }
         else
