@@ -6,12 +6,15 @@ public class SingleBarrel : Gun
 {
     public override void Shoot()
     {
+        Debug.Log("Main Shoot");
         if (this.gameObject.activeInHierarchy == true)
         {
+            
             if (!isAnimPlaying)
             {
                 isAnimPlaying = true;
                 animator.SetTrigger("Shoot");
+                ShootRay();
             }
         }
     }

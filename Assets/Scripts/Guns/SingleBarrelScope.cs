@@ -12,6 +12,7 @@ public override void Shoot()
             {
                 isAnimPlaying = true;
                 animator.SetTrigger("Shoot");
+                ShootRay();
             }
         }
     }

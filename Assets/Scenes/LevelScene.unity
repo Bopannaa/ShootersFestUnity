@@ -441,7 +441,7 @@ MonoBehaviour:
   moveRightClip: {fileID: 7400000, guid: 58d9215474db7ed6e90fa1f2c61caf2d, type: 2}
   moveLeftClip: {fileID: 7400000, guid: a16595293308a745abb57c39cfa02a5a, type: 2}
   totalChapters: 10
-  currentChapter: 3
+  currentChapter: 1
 --- !u!225 &351590616
 CanvasGroup:
   m_ObjectHideFlags: 0

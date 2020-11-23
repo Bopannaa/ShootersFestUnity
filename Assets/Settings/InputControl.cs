@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/InputControl.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Settings/InputControl.inputactions'
 
 using System;
 using System.Collections;
@@ -185,6 +185,14 @@ public class @InputControl : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""TT"",
+                    ""type"": ""Value"",
+                    ""id"": ""cd7a902d-b4c4-4d79-9b93-cc54798c78d9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -256,8 +264,8 @@ public class @InputControl : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ff5162a9-9b6e-4bf3-9a99-5287a58cb68a"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""id"": ""7ab4162f-b728-47c2-b165-8e7acba28c44"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
@@ -286,6 +294,17 @@ public class @InputControl : IInputActionCollection, IDisposable
                     ""action"": ""TouchPos"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c55be9c7-3111-4fb7-b815-71f24ddb03d6"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TT"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -305,6 +324,7 @@ public class @InputControl : IInputActionCollection, IDisposable
         m_Player_PosDelta = m_Player.FindAction("PosDelta", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_TouchPos = m_Player.FindAction("TouchPos", throwIfNotFound: true);
+        m_Player_TT = m_Player.FindAction("TT", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -416,6 +436,7 @@ public class @InputControl : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_PosDelta;
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_TouchPos;
+    private readonly InputAction m_Player_TT;
     public struct PlayerActions
     {
         private @InputControl m_Wrapper;
@@ -425,6 +446,7 @@ public class @InputControl : IInputActionCollection, IDisposable
         public InputAction @PosDelta => m_Wrapper.m_Player_PosDelta;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputAction @TouchPos => m_Wrapper.m_Player_TouchPos;
+        public InputAction @TT => m_Wrapper.m_Player_TT;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -449,6 +471,9 @@ public class @InputControl : IInputActionCollection, IDisposable
                 @TouchPos.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTouchPos;
                 @TouchPos.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTouchPos;
                 @TouchPos.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTouchPos;
+                @TT.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTT;
+                @TT.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTT;
+                @TT.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTT;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -468,6 +493,9 @@ public class @InputControl : IInputActionCollection, IDisposable
                 @TouchPos.started += instance.OnTouchPos;
                 @TouchPos.performed += instance.OnTouchPos;
                 @TouchPos.canceled += instance.OnTouchPos;
+                @TT.started += instance.OnTT;
+                @TT.performed += instance.OnTT;
+                @TT.canceled += instance.OnTT;
             }
         }
     }
@@ -486,5 +514,6 @@ public class @InputControl : IInputActionCollection, IDisposable
         void OnPosDelta(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnTouchPos(InputAction.CallbackContext context);
+        void OnTT(InputAction.CallbackContext context);
     }
 }

@@ -15,6 +15,9 @@ public abstract class Gun : MonoBehaviour
     [SerializeField]
     protected bool isAnimPlaying = false;
 
+    [SerializeField]
+    protected GameObject pointer;
+
     void Awake()
     {
         animator = transform.GetComponent<Animator>();
@@ -25,7 +28,7 @@ public abstract class Gun : MonoBehaviour
     void OnEnable()
     {
         currentTransform = this.transform;
-        currentTransform.DOMove(currentTransform.localPosition + Vector3.down * 1f, 0.3f).From();
+        //currentTransform.DOMove(currentTransform.localPosition + Vector3.down * 1f, 0.3f);
         AnimatorBehavoiur.ActionFinishAnimation += OnAnimationFinished;
     }
 
@@ -47,5 +50,18 @@ public abstract class Gun : MonoBehaviour
     protected abstract void OnReleased();
 
     protected abstract void OnAnimationFinished();
+
+    protected void ShootRay()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(pointer.transform.position, pointer.transform.TransformDirection(Vector3.forward), out hit, 1000))
+        {
+            Debug.Log("Shoot Performed");
+            if (hit.collider.transform.tag == "Balloon")
+            {
+                hit.transform.gameObject.SetActive(false);
+            }
+        }
+    }
 
 }

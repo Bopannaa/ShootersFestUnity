@@ -12,6 +12,7 @@ public class DoubleBarrel : Gun
             {
                 isAnimPlaying = true;
                 animator.SetTrigger("Shoot");
+                ShootRay();
             }
 
         }

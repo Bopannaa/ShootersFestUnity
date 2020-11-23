@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MachineGun : Gun
 {
+    private bool isShooting = false;
+
     void OnEnable()
     {
         GameScene.ActionShootButtonRelease += OnShootButtonRelease;
@@ -19,6 +21,8 @@ public class MachineGun : Gun
         if (this.gameObject.activeInHierarchy == true)
         {
             animator.SetBool("IsShooting" , true);
+            isShooting = true;
+            StartCoroutine(WaitAndShoot(1));
         }
     }
 
@@ -46,5 +50,16 @@ public class MachineGun : Gun
     void OnShootButtonRelease()
     {
         animator.SetBool("IsShooting" , false);
+        isShooting = false;
+    }
+
+    // every 2 seconds perform the shoot()
+    private IEnumerator WaitAndShoot(float waitTime)
+    {
+        while (isShooting)
+        {
+            ShootRay();
+            yield return new WaitForSeconds(waitTime);
+        }
     }
 }

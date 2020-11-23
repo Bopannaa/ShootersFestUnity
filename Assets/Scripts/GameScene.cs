@@ -12,7 +12,6 @@ public class GameScene : MonoBehaviour
 
     void Start()
     {
-        Game_Manager.Instance.ResetGame();
         Game_Manager.Instance.ResumeGame();
     }
     
@@ -51,6 +50,5 @@ public class GameScene : MonoBehaviour
     void OnDestroy()
     {
         Game_Manager.Instance.PauseGame();
-        Game_Manager.Instance.ResetGame();
     }
 }

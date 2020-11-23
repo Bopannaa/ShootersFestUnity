@@ -172,6 +172,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "TT",
+                    "type": "Value",
+                    "id": "cd7a902d-b4c4-4d79-9b93-cc54798c78d9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -243,8 +251,8 @@
                 },
                 {
                     "name": "",
-                    "id": "ff5162a9-9b6e-4bf3-9a99-5287a58cb68a",
-                    "path": "<Keyboard>/space",
+                    "id": "7ab4162f-b728-47c2-b165-8e7acba28c44",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
@@ -271,6 +279,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "TouchPos",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c55be9c7-3111-4fb7-b815-71f24ddb03d6",
+                    "path": "<Keyboard>/space",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TT",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

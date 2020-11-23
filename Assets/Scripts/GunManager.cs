@@ -14,24 +14,21 @@ public class GunManager : MonoBehaviour
 
     void OnEnable()
     {
-        //Game_Manager.Instance.ActionPauseGame += DisableGuns;
-        //Game_Manager.Instance.ActionResumeGame += EnableGuns;
         GameScene.ActionSwapButton += SwapGun;
-        GameScene.ActionShootButton += Shoot;
+        GameScene.ActionShootButtonRelease += Shoot;
         Scene_Manager.Instance.inputControl.Player.Shoot.performed += ctx => Shoot();
+
     }
 
     void OnDisable()
     {
-        //Game_Manager.Instance.ActionPauseGame -= DisableGuns;
-        //Game_Manager.Instance.ActionResumeGame -= EnableGuns;
         GameScene.ActionSwapButton -= SwapGun;
-        GameScene.ActionShootButton -= Shoot;
+        GameScene.ActionShootButtonRelease -= Shoot;
     }
 
     void Awake()
     {
-        foreach(Gun g in guns)
+        foreach (Gun g in guns)
         {
             gunsQueue.Enqueue(g);
         }
@@ -39,12 +36,12 @@ public class GunManager : MonoBehaviour
 
     void Start()
     {
-        
+        EnableGuns();
     }
 
     void Update()
     {
-        
+
     }
 
     void EnableGuns()
