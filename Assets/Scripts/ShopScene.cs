@@ -5,7 +5,7 @@ using System;
 
 public class ShopScene : MonoBehaviour
 {
-    public static Action ActionBackButton;
+    public static Action<string> ActionBackButton;
     public static Action ActionNextGunButton;
     public static Action ActionPreviousGunButton;
     
@@ -13,7 +13,7 @@ public class ShopScene : MonoBehaviour
     {
         if(ActionBackButton != null)
         {
-            ActionBackButton();
+            ActionBackButton("StartScene");
         }
     }
     

@@ -10,23 +10,27 @@ public class PlayPopup : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI levelDetailsText, currentLevelText;
 
-    private int currentLevel;
+    private string currentLevelName;
 
     private GameObject go;
 
+    public static Action<string> ActionPlayButton;
+
     public void ResetLevelDetails(int level, int noOfTargets, float time)
     {
-        currentLevel = level;
+        currentLevelName = "Level" + level.ToString();
         levelDetailsText.text = "Targets: " + noOfTargets
             + "\n"
             + "Time: " + time;
 
-        currentLevelText.text = "Level " + level;
+        currentLevelText.text = "Level " + level.ToString();
     }
 
     public void OnPlayButtonClick()
     {
-        var levelName = "Level" + currentLevel.ToString();
-        SceneManager.LoadScene(levelName);
+        if(ActionPlayButton != null)
+        {
+            ActionPlayButton(currentLevelName);
+        }
     }
 }

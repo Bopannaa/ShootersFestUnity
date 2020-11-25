@@ -5,10 +5,10 @@ using System;
 
 public class StartScene : MonoBehaviour
 {
-    public static Action ActionPlayButton;
+    public static Action<string> ActionPlayButton;
     public static Action ActionShareButton;
     public static Action ActionRateButton;
-    public static Action ActionShopButton;
+    public static Action<string> ActionShopButton;
     public static Action ActionSettingsButton;
     public static Action ActionQuitButton;
     public static Action ActionWatchAdButton;
@@ -17,7 +17,7 @@ public class StartScene : MonoBehaviour
     {
         if(ActionPlayButton != null)
         {
-            ActionPlayButton();
+            ActionPlayButton("LevelScene");
         }
     }
     
@@ -41,7 +41,7 @@ public class StartScene : MonoBehaviour
     {
         if(ActionShopButton != null)
         {
-            ActionShopButton();
+            ActionShopButton("ShopScene");
         }
     }
     

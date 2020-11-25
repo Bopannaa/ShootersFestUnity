@@ -8,12 +8,14 @@ public class GlobalPopups : MonoBehaviour
     {
         LevelChooser.ActionNoCredit += ShowNoCreditsPopup;
         LevelChooser.ActionLevelButton += ShowPlayPopup;
+        PlayPopup.ActionPlayButton += ShowLoadingPanel;
     }
 
     void OnDisable()
     {
         LevelChooser.ActionNoCredit -= ShowNoCreditsPopup;
         LevelChooser.ActionLevelButton -= ShowPlayPopup;
+        PlayPopup.ActionPlayButton -= ShowLoadingPanel;
     }
 
     [SerializeField]
@@ -22,14 +24,23 @@ public class GlobalPopups : MonoBehaviour
     [SerializeField]
     PlayPopup playPopup;
 
-    void ShowNoCreditsPopup()
+    [SerializeField]
+    LoadingPanel loadingPanel;
+
+    public void ShowNoCreditsPopup()
     {
         noCreditsPopup.gameObject.SetActive(true);
     }
 
-    void ShowPlayPopup(int level, int noOfTargets, float time)
+    public void ShowPlayPopup(int level, int noOfTargets, float time)
     {
         playPopup.gameObject.SetActive(true);
         playPopup.ResetLevelDetails(level, noOfTargets, time);
+    }
+
+    public void ShowLoadingPanel(string sceneName)
+    {
+        loadingPanel.gameObject.SetActive(true);
+        loadingPanel.Load(sceneName);
     }
 }

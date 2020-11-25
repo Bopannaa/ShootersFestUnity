@@ -26,10 +26,14 @@ public class InitSingletons : MonoBehaviour
         scene_Manager.CreatePersistableObjects -= CreateSingletonObjects;
     }
 
+        
+    
+
     void CreateSingletonObjects()
     {
         //Instantiate(worlEnv, new Vector3(0, -1, 11), Quaternion.identity, scene_Manager.transform);
         //Instantiate(player, Vector3.zero, Quaternion.identity, scene_Manager.transform);
-        Instantiate(globalPopupsPrefab,Vector3.zero, Quaternion.identity, scene_Manager.transform);
+        var globalPopups = Instantiate(globalPopupsPrefab,Vector3.zero, Quaternion.identity, scene_Manager.transform);
+        scene_Manager.globalPopups = globalPopups.GetComponent<GlobalPopups>();
     }
 }

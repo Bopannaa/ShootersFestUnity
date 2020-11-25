@@ -9,6 +9,7 @@ public class Scene_Manager : Singleton<Scene_Manager>
     public Action CreatePersistableObjects;
 
     public InputControl inputControl;
+    public GlobalPopups globalPopups;
 
     void Start()
     {
@@ -25,13 +26,11 @@ public class Scene_Manager : Singleton<Scene_Manager>
 
     public void OnEnable()
     {
-        StartScene.ActionShopButton += LoadShopScene;
-        StartScene.ActionPlayButton += LoadLevelScene;
         StartScene.ActionQuitButton += QuitGame;
-
-        ShopScene.ActionBackButton += LoadStartScene;
-
-        LevelScene.ActionBackButton += LoadStartScene;
+        StartScene.ActionShopButton += LoadScene;
+        StartScene.ActionPlayButton += LoadScene;
+        ShopScene.ActionBackButton  += LoadScene;
+        LevelScene.ActionBackButton += LoadScene;
 
         //LevelChooser.ActionLevelButton += LoadGameScene;
 
@@ -42,13 +41,11 @@ public class Scene_Manager : Singleton<Scene_Manager>
 
     void OnDisable()
     {
-        StartScene.ActionShopButton -= LoadShopScene;
         StartScene.ActionQuitButton -= QuitGame;
-        StartScene.ActionPlayButton -= LoadLevelScene;
-
-        LevelScene.ActionBackButton -= LoadStartScene;
-        
-        ShopScene.ActionBackButton -= LoadStartScene;
+        StartScene.ActionShopButton -= LoadScene;
+        StartScene.ActionPlayButton -= LoadScene;
+        LevelScene.ActionBackButton -= LoadScene;
+        ShopScene.ActionBackButton  -= LoadScene;
 
         //LevelChooser.ActionLevelButton -= LoadGameScene;
 
@@ -58,25 +55,9 @@ public class Scene_Manager : Singleton<Scene_Manager>
         inputControl.Disable();
     }
 
-    public void LoadShopScene()
+    public void LoadScene(string name)
     {
-        SceneManager.LoadScene("ShopScene");
-    }
-
-    public void LoadStartScene()
-    {
-        SceneManager.LoadScene("StartScene");
-    }
-
-    public void LoadLevelScene()
-    {
-        SceneManager.LoadScene("LevelScene");
-    }
-
-    public void LoadGameScene(int level)
-    {
-        var levelName = "Level" + level.ToString();
-        SceneManager.LoadScene(levelName);
+        globalPopups.ShowLoadingPanel(name);
     }
 
     public void QuitGame()

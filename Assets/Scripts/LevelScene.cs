@@ -5,7 +5,7 @@ using System;
 
 public class LevelScene : MonoBehaviour
 {
-    public static Action ActionBackButton;
+    public static Action<string> ActionBackButton;
     public static Action ActionNextChapterButton;
     public static Action ActionPreviousChapterButton;
     
@@ -13,7 +13,7 @@ public class LevelScene : MonoBehaviour
     {
         if(ActionBackButton != null)
         {
-            ActionBackButton();
+            ActionBackButton("StartScene");
         }
     }
     
