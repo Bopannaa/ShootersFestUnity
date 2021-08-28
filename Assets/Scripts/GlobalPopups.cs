@@ -20,27 +20,34 @@ public class GlobalPopups : MonoBehaviour
 
     [SerializeField]
     private NoCreditsPopup noCreditsPopup;
-    
+
     [SerializeField]
     PlayPopup playPopup;
 
     [SerializeField]
     LoadingPanel loadingPanel;
 
+    [SerializeField] WinPopup winPopup;
+
     public void ShowNoCreditsPopup()
     {
         noCreditsPopup.gameObject.SetActive(true);
     }
 
-    public void ShowPlayPopup(int level, int noOfTargets, float time)
+    public void ShowPlayPopup(int level)
     {
         playPopup.gameObject.SetActive(true);
-        playPopup.ResetLevelDetails(level, noOfTargets, time);
+        playPopup.ResetLevelDetails(level);
     }
 
     public void ShowLoadingPanel(string sceneName)
     {
         loadingPanel.gameObject.SetActive(true);
         loadingPanel.Load(sceneName);
+    }
+
+    public void ShowWinPopup()
+    {
+        winPopup.gameObject.SetActive(true);
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class JsonHelper : MonoBehaviour
+public class JsonHelper
 {    
     ShootersFest coconutShooter = new ShootersFest();
 

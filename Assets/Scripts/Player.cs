@@ -5,7 +5,7 @@ using DG.Tweening;
 using System;
 
 public class Player : MonoBehaviour
-{ 
+{
 
     [SerializeField]
     float rotSpeed;
@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        rotationY = Mathf.Clamp(rotationY, -15, 15);
+        rotationY = Mathf.Clamp(rotationY, -10, 30);
         rotationX = Mathf.Clamp(rotationX, -45, 45);
         DOTween.To(() => playerXrot, x => playerXrot = x, Vector3.up * rotationX, 1f).SetEase(ease);
         DOTween.To(() => playerYrot, y => playerYrot = y, Vector3.left * rotationY, 1f).SetEase(ease);

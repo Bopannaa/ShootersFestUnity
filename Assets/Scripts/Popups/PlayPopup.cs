@@ -11,18 +11,24 @@ public class PlayPopup : MonoBehaviour
     TextMeshProUGUI levelDetailsText, currentLevelText;
 
     private string currentLevelName;
+    Game_Manager game_Manager;
 
     private GameObject go;
 
     public static Action<string> ActionPlayButton;
 
-    public void ResetLevelDetails(int level, int noOfTargets, float time)
+    void Awake()
     {
-        currentLevelName = "Level" + level.ToString();
-        levelDetailsText.text = "Targets: " + noOfTargets
-            + "\n"
-            + "Time: " + time;
+        game_Manager = Game_Manager.Instance;
+    }
 
+    public void ResetLevelDetails(int level)
+    {
+        game_Manager.currentLevel = level - 1;
+        currentLevelName = "Level" + level.ToString();
+        levelDetailsText.text = "Targets: " + game_Manager.levelHelper.levels[level - 1].targetCount
+            + "\n"
+            + "Time: " + game_Manager.levelHelper.levels[level - 1].time;
         currentLevelText.text = "Level " + level.ToString();
     }
 
